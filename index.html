@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocabulario básico UD5 de Chino I</title>
+  <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .sidebar {
+      width: 200px;
+      margin-right: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+    .sidebar h3 {
+      margin-top: 0;
+      font-size: 16px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar li {
+      margin: 5px 0;
+    }
+    .sidebar button {
+      width: 100%;
+      padding: 8px;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      text-align: left;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+    .sidebar button:hover {
+      background-color: #e0e0e0;
+    }
+    .sidebar button.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .character-display-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    #character-target-div {
+      border: 1px solid #ccc;
+      background-color: white;
+      margin: 20px 0 10px 0;
+      width: 150px;
+      height: 150px;
+    }
+    .replay-button {
+      padding: 8px 16px;
+      background-color: #FF9800;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 0 auto;
+      transition: background-color 0.3s;
+    }
+    .replay-button:hover {
+      background-color: #F57C00;
+    }
+    .replay-button:active {
+      transform: scale(0.95);
+    }
+    .canvas-container {
+      position: relative;
+      margin: 20px 0;
+    }
+    #character-canvas {
+      border: 2px solid #333;
+      border-radius: 5px;
+      cursor: crosshair;
+      background-color: white;
+      touch-action: none;
+    }
+    .canvas-controls {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .canvas-controls button {
+      padding: 8px 15px;
+      font-size: 14px;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .canvas-controls button:hover {
+      background-color: #1976D2;
+    }
+    .clear-button {
+      background-color: #f44336 !important;
+    }
+    .clear-button:hover {
+      background-color: #d32f2f !important;
+    }
+    .stroke-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .stroke-control input {
+      width: 100px;
+    }
+    .nav-buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .nav-buttons button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .nav-buttons button:hover {
+      background-color: #45a049;
+    }
+    #current-word {
+      font-size: 20px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      padding: 0 10px;
+    }
+    .practice-section {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    .practice-section h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    
+    /* Mobile menu toggle */
+    .mobile-menu-toggle {
+      display: none;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    
+    /* Tablet styles */
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+      }
+      
+      .container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+        max-height: 300px;
+      }
+      
+      .practice-section {
+        padding: 15px;
+        max-width: 100%;
+      }
+      
+      #character-canvas {
+        width: 220px !important;
+        height: 220px !important;
+      }
+    }
+    
+    /* Mobile styles */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .sidebar {
+        display: none;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+        max-height: 250px;
+      }
+      
+      .sidebar.show {
+        display: block;
+      }
+      
+      .sidebar h3 {
+        font-size: 14px;
+      }
+      
+      .sidebar button {
+        padding: 6px;
+        font-size: 12px;
+      }
+      
+      #current-word {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      
+      #character-target-div {
+        width: 120px !important;
+        height: 120px !important;
+        margin: 15px 0 10px 0;
+      }
+      
+      .replay-button {
+        font-size: 13px;
+        padding: 6px 12px;
+      }
+      
+      .practice-section {
+        padding: 15px;
+        margin-top: 15px;
+      }
+      
+      .practice-section h3 {
+        font-size: 16px;
+      }
+      
+      #character-canvas {
+        width: 200px !important;
+        height: 200px !important;
+      }
+      
+      .canvas-controls {
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .canvas-controls button {
+        width: 100%;
+        padding: 10px;
+      }
+      
+      .stroke-control {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .nav-buttons {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      
+      .nav-buttons button {
+        flex: 1;
+        min-width: 120px;
+        padding: 12px 15px;
+        font-size: 14px;
+      }
+    }
+    
+    /* Very small mobile styles */
+    @media (max-width: 400px) {
+      body {
+        padding: 5px;
+      }
+      
+      #current-word {
+        font-size: 14px;
+      }
+      
+      #character-target-div {
+        width: 100px !important;
+        height: 100px !important;
+      }
+      
+      .replay-button {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
+      
+      #character-canvas {
+        width: 180px !important;
+        height: 180px !important;
+      }
+      
+      .practice-section {
+        padding: 10px;
+      }
+      
+      .practice-section h3 {
+        font-size: 14px;
+      }
+      
+      .canvas-controls button {
+        font-size: 13px;
+        padding: 8px;
+      }
+      
+      .nav-buttons button {
+        font-size: 13px;
+        padding: 10px 12px;
+      }
+    }
+    
+    /* Landscape mobile */
+    @media (max-width: 900px) and (orientation: landscape) {
+      body {
+        padding: 10px;
+      }
+      
+      .container {
+        flex-direction: row;
+      }
+      
+      .sidebar {
+        width: 180px;
+        margin-right: 15px;
+        max-height: 70vh;
+      }
+      
+      .sidebar h3 {
+        font-size: 14px;
+      }
+      
+      .sidebar button {
+        padding: 5px;
+        font-size: 12px;
+      }
+      
+      #character-target-div {
+        width: 100px !important;
+        height: 100px !important;
+      }
+      
+      .replay-button {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
+      
+      #character-canvas {
+        width: 180px !important;
+        height: 180px !important;
+      }
+      
+      .practice-section {
+        padding: 10px;
+      }
+      
+      .mobile-menu-toggle {
+        display: none;
+      }
+      
+      .sidebar {
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰ Menú de Caracteres</button>
+    
+    <div class="sidebar" id="sidebar">
+      <h3>Selecciona un carácter</h3>
+      <ul id="character-menu"></ul>
+    </div>
+
+    <div class="main-content">
+      <div id="current-word"></div>
+      
+      <div class="character-display-section">
+        <div id="character-target-div"></div>
+        <button class="replay-button" onclick="replayAnimation()">
+          ↻ Repetir animación
+        </button>
+      </div>
+
+      <div class="practice-section">
+        <h3>Practica escribir el caracter</h3>
+        <div class="canvas-container">
+          <canvas id="character-canvas" width="250" height="250"></canvas>
+        </div>
+        <div class="canvas-controls">
+          <button class="clear-button" onclick="clearCanvas()">Limpiar</button>
+          <button onclick="toggleGuide()">Mostrar/Ocultar Guía</button>
+          <div class="stroke-control">
+            <label for="stroke-width">Grosor:</label>
+            <input type="range" id="stroke-width" min="1" max="10" value="3">
+            <span id="stroke-value">3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button id="prev-button">← Anterior</button>
+        <button id="next-button">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+const characters = [
+  { char: '会', pinyin: 'huì', spanish: 'saber (habilidad)' },
+  { char: '能', pinyin: 'néng', spanish: 'poder (capacidad)' },
+  { char: '进', pinyin: 'jìn', spanish: 'entrar' },
+  { char: '来', pinyin: 'lái', spanish: 'venir' },
+  { char: '等', pinyin: 'děng', spanish: 'esperar' },
+  { char: '帮', pinyin: 'bāng', spanish: 'ayudar' },
+  { char: '说', pinyin: 'shuō', spanish: 'decir/hablar' },
+  { char: '慢', pinyin: 'màn', spanish: 'lento/despacio' },
+  { char: '一', pinyin: 'yī', spanish: 'uno' },
+  { char: '下', pinyin: 'xià', spanish: 'abajo/un momento' },
+  { char: '点', pinyin: 'diǎn', spanish: 'punto/un poco' },
+  { char: '晚', pinyin: 'wǎn', spanish: 'tarde' },
+  { char: '电', pinyin: 'diàn', spanish: 'electricidad' },
+  { char: '音', pinyin: 'yīn', spanish: 'sonido/música' },
+  { char: '还', pinyin: 'hái', spanish: 'todavía/aún' },
+  { char: '开', pinyin: 'kāi', spanish: 'abrir/empezar' },
+  { char: '始', pinyin: 'shǐ', spanish: 'comenzar' },
+  { char: '知', pinyin: 'zhī', spanish: 'saber' },
+  { char: '道', pinyin: 'dào', spanish: 'camino (saber)' },
+  { char: '再', pinyin: 'zài', spanish: 'otra vez' },
+  { char: '遍', pinyin: 'biàn', spanish: 'vez (repetición)' },
+  { char: '今', pinyin: 'jīn', spanish: 'hoy' },
+  { char: '天', pinyin: 'tiān', spanish: 'día/cielo' },
+  { char: '明', pinyin: 'míng', spanish: 'mañana/brillante' },
+  { char: '昨', pinyin: 'zuó', spanish: 'ayer' },
+  { char: '气', pinyin: 'qì', spanish: 'aire/clima' },
+  { char: '去', pinyin: 'qù', spanish: 'ir' },
+  { char: '时', pinyin: 'shí', spanish: 'tiempo/hora' },
+  { char: '间', pinyin: 'jiān', spanish: 'espacio/intervalo' },
+  { char: '打', pinyin: 'dǎ', spanish: 'golpear/jugar' },
+  { char: '篮', pinyin: 'lán', spanish: 'canasta' },
+  { char: '球', pinyin: 'qiú', spanish: 'pelota' },
+  { char: '抱', pinyin: 'bào', spanish: 'abrazar' },
+  { char: '歉', pinyin: 'qiàn', spanish: 'disculpa' },
+  { char: '当', pinyin: 'dāng', spanish: 'cuando' },
+  { char: '然', pinyin: 'rán', spanish: 'naturalmente' },
+  { char: '现', pinyin: 'xiàn', spanish: 'ahora' },
+  { char: '害', pinyin: 'hài', spanish: 'dañar/tener miedo' },
+  { char: '怕', pinyin: 'pà', spanish: 'temer/miedo' },
+  { char: '不', pinyin: 'bù', spanish: 'no' },
+  { char: '行', pinyin: 'xíng', spanish: 'estar bien/no poder' },
+  { char: '晴', pinyin: 'qíng', spanish: 'soleado' },
+  { char: '风', pinyin: 'fēng', spanish: 'viento' },
+  { char: '雨', pinyin: 'yǔ', spanish: 'lluvia' },
+  { char: '跳', pinyin: 'tiào', spanish: 'saltar' },
+  { char: '舞', pinyin: 'wǔ', spanish: 'danza' },
+  { char: '看', pinyin: 'kàn', spanish: 'ver' },
+  { char: '电', pinyin: 'diàn', spanish: 'electricidad (película)' },
+  { char: '影', pinyin: 'yǐng', spanish: 'sombra (película)' },
+  { char: '购', pinyin: 'gòu', spanish: 'comprar' },
+  { char: '物', pinyin: 'wù', spanish: 'cosa' },
+  { char: '唱', pinyin: 'chàng', spanish: 'cantar' },
+  { char: '书', pinyin: 'shū', spanish: 'libro' },
+  { char: '吃', pinyin: 'chī', spanish: 'comer' },
+  { char: '饭', pinyin: 'fàn', spanish: 'comida' },
+  { char: '做', pinyin: 'zuò', spanish: 'hacer' },
+  { char: '车', pinyin: 'chē', spanish: 'coche' },
+  { char: '游', pinyin: 'yóu', spanish: 'nadar' },
+  { char: '泳', pinyin: 'yǒng', spanish: 'natación' },
+  { char: '跑', pinyin: 'pǎo', spanish: 'correr' },
+  { char: '电', pinyin: 'diàn', spanish: 'electricidad (teléfono)' },
+  { char: '话', pinyin: 'huà', spanish: 'palabra (teléfono)' }
+];
+    let currentIndex = 0;
+    let writer = null;
+    let isDrawing = false;
+    let showGuide = true;
+    let lastX = 0;
+    let lastY = 0;
+
+    // Canvas setup
+    const canvas = document.getElementById('character-canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    // Stroke width control
+    const strokeWidthInput = document.getElementById('stroke-width');
+    const strokeValueDisplay = document.getElementById('stroke-value');
+    strokeWidthInput.addEventListener('input', (e) => {
+      ctx.lineWidth = e.target.value;
+      strokeValueDisplay.textContent = e.target.value;
+    });
+    ctx.lineWidth = strokeWidthInput.value;
+
+    // Drawing functions
+    function startDrawing(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX || e.touches[0].clientX) - rect.left;
+      const y = (e.clientY || e.touches[0].clientY) - rect.top;
+      lastX = x * (canvas.width / rect.width);
+      lastY = y * (canvas.height / rect.height);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX || e.touches[0].clientX) - rect.left;
+      const y = (e.clientY || e.touches[0].clientY) - rect.top;
+      const currentX = x * (canvas.width / rect.width);
+      const currentY = y * (canvas.height / rect.height);
+
+      ctx.strokeStyle = '#000';
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(currentX, currentY);
+      ctx.stroke();
+
+      lastX = currentX;
+      lastY = currentY;
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    // Mouse events
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+
+    // Touch events for mobile
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      startDrawing(e);
+    });
+    canvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      draw(e);
+    });
+    canvas.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      stopDrawing();
+    });
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (showGuide) {
+        drawGuideCharacter();
+      }
+    }
+
+    function drawGuideCharacter() {
+      const item = characters[currentIndex];
+      ctx.save();
+      ctx.font = '180px Arial';
+      ctx.fillStyle = 'rgba(200, 200, 200, 0.3)';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(item.char, canvas.width / 2, canvas.height / 2);
+      ctx.restore();
+    }
+
+    function toggleGuide() {
+      showGuide = !showGuide;
+      const currentLineWidth = ctx.lineWidth;
+      clearCanvas();
+      ctx.lineWidth = currentLineWidth;
+    }
+
+    function toggleMobileMenu() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('show');
+    }
+
+    // Function to replay the character animation
+    function replayAnimation() {
+      if (writer) {
+        writer.animateCharacter();
+      }
+    }
+
+    function showCharacter(index) {
+      if (index >= characters.length) {
+        index = 0;
+      } else if (index < 0) {
+        index = characters.length - 1;
+      }
+      currentIndex = index;
+      const item = characters[index];
+
+      // Update current word display
+      document.getElementById('current-word').textContent = `${item.char} (${item.pinyin}) - ${item.spanish}`;
+
+      // Update HanziWriter display
+      const targetDiv = document.getElementById('character-target-div');
+      targetDiv.innerHTML = '';
+
+      const divWidth = targetDiv.offsetWidth || 150;
+      const divHeight = targetDiv.offsetHeight || 150;
+      
+      writer = HanziWriter.create('character-target-div', item.char, {
+        width: divWidth,
+        height: divHeight,
+        padding: 10,
+        strokeColor: '#000',
+        strokeAnimationSpeed: 1,
+        delayBetweenStrokes: 300,
+      });
+      writer.animateCharacter();
+
+      // Clear and update canvas
+      clearCanvas();
+
+      // Update active button in sidebar
+      const buttons = document.querySelectorAll('.sidebar button');
+      buttons.forEach((btn, i) => {
+        if (i === index) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Close mobile menu after selection on small screens
+      if (window.innerWidth <= 600) {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.remove('show');
+      }
+    }
+
+    function generateMenu() {
+      const menu = document.getElementById('character-menu');
+      characters.forEach((item, index) => {
+        const li = document.createElement('li');
+        const button = document.createElement('button');
+        button.textContent = `${item.char} (${item.pinyin})`;
+        button.addEventListener('click', () => showCharacter(index));
+        li.appendChild(button);
+        menu.appendChild(li);
+      });
+    }
+
+    // Initialize
+    generateMenu();
+    showCharacter(currentIndex);
+
+    // Navigation buttons
+    document.getElementById('prev-button').addEventListener('click', () => {
+      showCharacter(currentIndex - 1);
+    });
+
+    document.getElementById('next-button').addEventListener('click', () => {
+      showCharacter(currentIndex + 1);
+    });
+
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        showCharacter(currentIndex);
+      }, 250);
+    });
+  </script>
+</body>
+</html>
