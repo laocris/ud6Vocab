@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vocabulario básico UD5 de Chino I</title>
+  <title>Vocabulario básico UD6 de Chino I</title>
   <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
   <style>
     body {
@@ -196,7 +196,56 @@
       margin-bottom: 10px;
       cursor: pointer;
     }
-    
+
+    /* Audio */
+      .audio-button {
+          background-color: skyblue;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          border: none;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 13px;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .audio-button:hover {
+          background-color: #7dd3fc;
+          transform: scale(1.1);
+          box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .audio-button:active {
+          transform: scale(0.95);
+      }
+
+    /* Attribution */
+    .attribution {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      text-align: center;
+      padding: 15px 10px;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .attribution a {
+      color: #0073b1;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .attribution a:hover {
+      text-decoration: underline;
+    }
     /* Tablet styles */
     @media (max-width: 768px) {
       body {
@@ -413,6 +462,69 @@
   </style>
 </head>
 <body>
+<audio id="audio-hui" preload="auto"><source src="./audiosUD6/会.m4a" type="audio/mp4"></audio>
+<audio id="audio-neng" preload="auto"><source src="./audiosUD6/能.m4a" type="audio/mp4"></audio>
+<audio id="audio-jin" preload="auto"><source src="./audiosUD6/进.m4a" type="audio/mp4"></audio>
+<audio id="audio-lai" preload="auto"><source src="./audiosUD6/来.m4a" type="audio/mp4"></audio>
+<audio id="audio-deng" preload="auto"><source src="./audiosUD6/等.m4a" type="audio/mp4"></audio>
+<audio id="audio-bang" preload="auto"><source src="./audiosUD6/帮.m4a" type="audio/mp4"></audio>
+<audio id="audio-shuo" preload="auto"><source src="./audiosUD6/说.m4a" type="audio/mp4"></audio>
+<audio id="audio-man" preload="auto"><source src="./audiosUD6/慢.m4a" type="audio/mp4"></audio>
+<audio id="audio-yi" preload="auto"><source src="./audiosUD6/一.m4a" type="audio/mp4"></audio>
+<audio id="audio-xia" preload="auto"><source src="./audiosUD6/下.m4a" type="audio/mp4"></audio>
+<audio id="audio-dian" preload="auto"><source src="./audiosUD6/点.m4a" type="audio/mp4"></audio>
+<audio id="audio-wan" preload="auto"><source src="./audiosUD6/晚.m4a" type="audio/mp4"></audio>
+<audio id="audio-dian1" preload="auto"><source src="./audiosUD6/电.m4a" type="audio/mp4"></audio>
+<audio id="audio-yin" preload="auto"><source src="./audiosUD6/音.m4a" type="audio/mp4"></audio>
+<audio id="audio-hai" preload="auto"><source src="./audiosUD6/还.m4a" type="audio/mp4"></audio>
+<audio id="audio-kai" preload="auto"><source src="./audiosUD6/开.m4a" type="audio/mp4"></audio>
+<audio id="audio-shi" preload="auto"><source src="./audiosUD6/始.m4a" type="audio/mp4"></audio>
+<audio id="audio-zhi" preload="auto"><source src="./audiosUD6/知.m4a" type="audio/mp4"></audio>
+<audio id="audio-dao" preload="auto"><source src="./audiosUD6/道.m4a" type="audio/mp4"></audio>
+<audio id="audio-zai" preload="auto"><source src="./audiosUD6/再.m4a" type="audio/mp4"></audio>
+<audio id="audio-bian" preload="auto"><source src="./audiosUD6/遍.m4a" type="audio/mp4"></audio>
+<audio id="audio-jin1" preload="auto"><source src="./audiosUD6/今.m4a" type="audio/mp4"></audio>
+<audio id="audio-tian" preload="auto"><source src="./audiosUD6/天.m4a" type="audio/mp4"></audio>
+<audio id="audio-ming" preload="auto"><source src="./audiosUD6/明.m4a" type="audio/mp4"></audio>
+<audio id="audio-zuo" preload="auto"><source src="./audiosUD6/昨.m4a" type="audio/mp4"></audio>
+<audio id="audio-qi" preload="auto"><source src="./audiosUD6/气.m4a" type="audio/mp4"></audio>
+<audio id="audio-qu" preload="auto"><source src="./audiosUD6/去.m4a" type="audio/mp4"></audio>
+<audio id="audio-shi1" preload="auto"><source src="./audiosUD6/时.m4a" type="audio/mp4"></audio>
+<audio id="audio-jian" preload="auto"><source src="./audiosUD6/间.m4a" type="audio/mp4"></audio>
+<audio id="audio-da" preload="auto"><source src="./audiosUD6/打.m4a" type="audio/mp4"></audio>
+<audio id="audio-lan" preload="auto"><source src="./audiosUD6/篮.m4a" type="audio/mp4"></audio>
+<audio id="audio-qiu" preload="auto"><source src="./audiosUD6/球.m4a" type="audio/mp4"></audio>
+<audio id="audio-bao" preload="auto"><source src="./audiosUD6/抱.m4a" type="audio/mp4"></audio>
+<audio id="audio-qian" preload="auto"><source src="./audiosUD6/歉.m4a" type="audio/mp4"></audio>
+<audio id="audio-dang" preload="auto"><source src="./audiosUD6/当.m4a" type="audio/mp4"></audio>
+<audio id="audio-ran" preload="auto"><source src="./audiosUD6/然.m4a" type="audio/mp4"></audio>
+<audio id="audio-xian" preload="auto"><source src="./audiosUD6/现.m4a" type="audio/mp4"></audio>
+<audio id="audio-hai1" preload="auto"><source src="./audiosUD6/害.m4a" type="audio/mp4"></audio>
+<audio id="audio-pa" preload="auto"><source src="./audiosUD6/怕.m4a" type="audio/mp4"></audio>
+<audio id="audio-bu" preload="auto"><source src="./audiosUD6/不.m4a" type="audio/mp4"></audio>
+<audio id="audio-xing" preload="auto"><source src="./audiosUD6/行.m4a" type="audio/mp4"></audio>
+<audio id="audio-qing" preload="auto"><source src="./audiosUD6/晴.m4a" type="audio/mp4"></audio>
+<audio id="audio-feng" preload="auto"><source src="./audiosUD6/风.m4a" type="audio/mp4"></audio>
+<audio id="audio-yu" preload="auto"><source src="./audiosUD6/雨.m4a" type="audio/mp4"></audio>
+<audio id="audio-tiao" preload="auto"><source src="./audiosUD6/跳.m4a" type="audio/mp4"></audio>
+<audio id="audio-wu" preload="auto"><source src="./audiosUD6/舞.m4a" type="audio/mp4"></audio>
+<audio id="audio-kan" preload="auto"><source src="./audiosUD6/看.m4a" type="audio/mp4"></audio>
+<audio id="audio-dian2" preload="auto"><source src="./audiosUD6/电.m4a" type="audio/mp4"></audio>
+<audio id="audio-ying" preload="auto"><source src="./audiosUD6/影.m4a" type="audio/mp4"></audio>
+<audio id="audio-gou" preload="auto"><source src="./audiosUD6/购.m4a" type="audio/mp4"></audio>
+<audio id="audio-wu1" preload="auto"><source src="./audiosUD6/物.m4a" type="audio/mp4"></audio>
+<audio id="audio-chang" preload="auto"><source src="./audiosUD6/唱.m4a" type="audio/mp4"></audio>
+<audio id="audio-shu" preload="auto"><source src="./audiosUD6/书.m4a" type="audio/mp4"></audio>
+<audio id="audio-chi" preload="auto"><source src="./audiosUD6/吃.m4a" type="audio/mp4"></audio>
+<audio id="audio-fan" preload="auto"><source src="./audiosUD6/饭.m4a" type="audio/mp4"></audio>
+<audio id="audio-zuo1" preload="auto"><source src="./audiosUD6/做.m4a" type="audio/mp4"></audio>
+<audio id="audio-che" preload="auto"><source src="./audiosUD6/车.m4a" type="audio/mp4"></audio>
+<audio id="audio-you" preload="auto"><source src="./audiosUD6/游.m4a" type="audio/mp4"></audio>
+<audio id="audio-yong" preload="auto"><source src="./audiosUD6/泳.m4a" type="audio/mp4"></audio>
+<audio id="audio-pao" preload="auto"><source src="./audiosUD6/跑.m4a" type="audio/mp4"></audio>
+<audio id="audio-dian3" preload="auto"><source src="./audiosUD6/电.m4a" type="audio/mp4"></audio>
+<audio id="audio-hua" preload="auto"><source src="./audiosUD6/话.m4a" type="audio/mp4"></audio>
+
   <div class="container">
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰ Menú de Caracteres</button>
     
@@ -425,6 +537,9 @@
       <div id="current-word"></div>
       
       <div class="character-display-section">
+        <button class="audio-button" id="audio-button" onclick="playAudio()">
+            🔊 
+          </button>
         <div id="character-target-div"></div>
         <button class="replay-button" onclick="replayAnimation()">
           ↻ Repetir animación
@@ -451,80 +566,93 @@
         <button id="prev-button">← Anterior</button>
         <button id="next-button">Siguiente →</button>
       </div>
+       <div class="attribution">
+          Audios provided by 
+          <a href="https://es.linkedin.com/in/raquel-cubas-godoy-0427b71ba" 
+            target="_blank" 
+            rel="noopener noreferrer">
+            Professor Raquel Cubas
+          </a> 
+          from ULPGC.
+        </div>
     </div>
   </div>
 
+
   <script>
-const characters = [
-  { char: '会', pinyin: 'huì', spanish: 'saber (habilidad)' },
-  { char: '能', pinyin: 'néng', spanish: 'poder (capacidad)' },
-  { char: '进', pinyin: 'jìn', spanish: 'entrar' },
-  { char: '来', pinyin: 'lái', spanish: 'venir' },
-  { char: '等', pinyin: 'děng', spanish: 'esperar' },
-  { char: '帮', pinyin: 'bāng', spanish: 'ayudar' },
-  { char: '说', pinyin: 'shuō', spanish: 'decir/hablar' },
-  { char: '慢', pinyin: 'màn', spanish: 'lento/despacio' },
-  { char: '一', pinyin: 'yī', spanish: 'uno' },
-  { char: '下', pinyin: 'xià', spanish: 'abajo/un momento' },
-  { char: '点', pinyin: 'diǎn', spanish: 'punto/un poco' },
-  { char: '晚', pinyin: 'wǎn', spanish: 'tarde' },
-  { char: '电', pinyin: 'diàn', spanish: 'electricidad' },
-  { char: '音', pinyin: 'yīn', spanish: 'sonido/música' },
-  { char: '还', pinyin: 'hái', spanish: 'todavía/aún' },
-  { char: '开', pinyin: 'kāi', spanish: 'abrir/empezar' },
-  { char: '始', pinyin: 'shǐ', spanish: 'comenzar' },
-  { char: '知', pinyin: 'zhī', spanish: 'saber' },
-  { char: '道', pinyin: 'dào', spanish: 'camino (saber)' },
-  { char: '再', pinyin: 'zài', spanish: 'otra vez' },
-  { char: '遍', pinyin: 'biàn', spanish: 'vez (repetición)' },
-  { char: '今', pinyin: 'jīn', spanish: 'hoy' },
-  { char: '天', pinyin: 'tiān', spanish: 'día/cielo' },
-  { char: '明', pinyin: 'míng', spanish: 'mañana/brillante' },
-  { char: '昨', pinyin: 'zuó', spanish: 'ayer' },
-  { char: '气', pinyin: 'qì', spanish: 'aire/clima' },
-  { char: '去', pinyin: 'qù', spanish: 'ir' },
-  { char: '时', pinyin: 'shí', spanish: 'tiempo/hora' },
-  { char: '间', pinyin: 'jiān', spanish: 'espacio/intervalo' },
-  { char: '打', pinyin: 'dǎ', spanish: 'golpear/jugar' },
-  { char: '篮', pinyin: 'lán', spanish: 'canasta' },
-  { char: '球', pinyin: 'qiú', spanish: 'pelota' },
-  { char: '抱', pinyin: 'bào', spanish: 'abrazar' },
-  { char: '歉', pinyin: 'qiàn', spanish: 'disculpa' },
-  { char: '当', pinyin: 'dāng', spanish: 'cuando' },
-  { char: '然', pinyin: 'rán', spanish: 'naturalmente' },
-  { char: '现', pinyin: 'xiàn', spanish: 'ahora' },
-  { char: '害', pinyin: 'hài', spanish: 'dañar/tener miedo' },
-  { char: '怕', pinyin: 'pà', spanish: 'temer/miedo' },
-  { char: '不', pinyin: 'bù', spanish: 'no' },
-  { char: '行', pinyin: 'xíng', spanish: 'estar bien/no poder' },
-  { char: '晴', pinyin: 'qíng', spanish: 'soleado' },
-  { char: '风', pinyin: 'fēng', spanish: 'viento' },
-  { char: '雨', pinyin: 'yǔ', spanish: 'lluvia' },
-  { char: '跳', pinyin: 'tiào', spanish: 'saltar' },
-  { char: '舞', pinyin: 'wǔ', spanish: 'danza' },
-  { char: '看', pinyin: 'kàn', spanish: 'ver' },
-  { char: '电', pinyin: 'diàn', spanish: 'electricidad (película)' },
-  { char: '影', pinyin: 'yǐng', spanish: 'sombra (película)' },
-  { char: '购', pinyin: 'gòu', spanish: 'comprar' },
-  { char: '物', pinyin: 'wù', spanish: 'cosa' },
-  { char: '唱', pinyin: 'chàng', spanish: 'cantar' },
-  { char: '书', pinyin: 'shū', spanish: 'libro' },
-  { char: '吃', pinyin: 'chī', spanish: 'comer' },
-  { char: '饭', pinyin: 'fàn', spanish: 'comida' },
-  { char: '做', pinyin: 'zuò', spanish: 'hacer' },
-  { char: '车', pinyin: 'chē', spanish: 'coche' },
-  { char: '游', pinyin: 'yóu', spanish: 'nadar' },
-  { char: '泳', pinyin: 'yǒng', spanish: 'natación' },
-  { char: '跑', pinyin: 'pǎo', spanish: 'correr' },
-  { char: '电', pinyin: 'diàn', spanish: 'electricidad (teléfono)' },
-  { char: '话', pinyin: 'huà', spanish: 'palabra (teléfono)' }
-];
+  const characters = [
+    { char: '会', pinyin: 'huì', spanish: 'saber (habilidad)', audioId: 'audio-hui' },
+    { char: '能', pinyin: 'néng', spanish: 'poder (capacidad)', audioId: 'audio-neng' },
+    { char: '进', pinyin: 'jìn', spanish: 'entrar', audioId: 'audio-jin' },
+    { char: '来', pinyin: 'lái', spanish: 'venir', audioId: 'audio-lai' },
+    { char: '等', pinyin: 'děng', spanish: 'esperar', audioId: 'audio-deng' },
+    { char: '帮', pinyin: 'bāng', spanish: 'ayudar', audioId: 'audio-bang' },
+    { char: '说', pinyin: 'shuō', spanish: 'decir/hablar', audioId: 'audio-shuo' },
+    { char: '慢', pinyin: 'màn', spanish: 'lento/despacio', audioId: 'audio-man' },
+    { char: '一', pinyin: 'yī', spanish: 'uno', audioId: 'audio-yi' },
+    { char: '下', pinyin: 'xià', spanish: 'abajo/un momento', audioId: 'audio-xia' },
+    { char: '点', pinyin: 'diǎn', spanish: 'punto/un poco', audioId: 'audio-dian' },
+    { char: '晚', pinyin: 'wǎn', spanish: 'tarde', audioId: 'audio-wan' },
+    { char: '电', pinyin: 'diàn', spanish: 'electricidad', audioId: 'audio-dian1' },
+    { char: '音', pinyin: 'yīn', spanish: 'sonido/música', audioId: 'audio-yin' },
+    { char: '还', pinyin: 'hái', spanish: 'todavía/aún', audioId: 'audio-hai' },
+    { char: '开', pinyin: 'kāi', spanish: 'abrir/empezar', audioId: 'audio-kai' },
+    { char: '始', pinyin: 'shǐ', spanish: 'comenzar', audioId: 'audio-shi' },
+    { char: '知', pinyin: 'zhī', spanish: 'saber', audioId: 'audio-zhi' },
+    { char: '道', pinyin: 'dào', spanish: 'camino (saber)', audioId: 'audio-dao' },
+    { char: '再', pinyin: 'zài', spanish: 'otra vez', audioId: 'audio-zai' },
+    { char: '遍', pinyin: 'biàn', spanish: 'vez (repetición)', audioId: 'audio-bian' },
+    { char: '今', pinyin: 'jīn', spanish: 'hoy', audioId: 'audio-jin1' },
+    { char: '天', pinyin: 'tiān', spanish: 'día/cielo', audioId: 'audio-tian' },
+    { char: '明', pinyin: 'míng', spanish: 'mañana/brillante', audioId: 'audio-ming' },
+    { char: '昨', pinyin: 'zuó', spanish: 'ayer', audioId: 'audio-zuo' },
+    { char: '气', pinyin: 'qì', spanish: 'aire/clima', audioId: 'audio-qi' },
+    { char: '去', pinyin: 'qù', spanish: 'ir', audioId: 'audio-qu' },
+    { char: '时', pinyin: 'shí', spanish: 'tiempo/hora', audioId: 'audio-shi1' },
+    { char: '间', pinyin: 'jiān', spanish: 'espacio/intervalo', audioId: 'audio-jian' },
+    { char: '打', pinyin: 'dǎ', spanish: 'golpear/jugar', audioId: 'audio-da' },
+    { char: '篮', pinyin: 'lán', spanish: 'canasta', audioId: 'audio-lan' },
+    { char: '球', pinyin: 'qiú', spanish: 'pelota', audioId: 'audio-qiu' },
+    { char: '抱', pinyin: 'bào', spanish: 'abrazar', audioId: 'audio-bao' },
+    { char: '歉', pinyin: 'qiàn', spanish: 'disculpa', audioId: 'audio-qian' },
+    { char: '当', pinyin: 'dāng', spanish: 'cuando', audioId: 'audio-dang' },
+    { char: '然', pinyin: 'rán', spanish: 'naturalmente', audioId: 'audio-ran' },
+    { char: '现', pinyin: 'xiàn', spanish: 'ahora', audioId: 'audio-xian' },
+    { char: '害', pinyin: 'hài', spanish: 'dañar/tener miedo', audioId: 'audio-hai1' },
+    { char: '怕', pinyin: 'pà', spanish: 'temer/miedo', audioId: 'audio-pa' },
+    { char: '不', pinyin: 'bù', spanish: 'no', audioId: 'audio-bu' },
+    { char: '行', pinyin: 'xíng', spanish: 'estar bien/no poder', audioId: 'audio-xing' },
+    { char: '晴', pinyin: 'qíng', spanish: 'soleado', audioId: 'audio-qing' },
+    { char: '风', pinyin: 'fēng', spanish: 'viento', audioId: 'audio-feng' },
+    { char: '雨', pinyin: 'yǔ', spanish: 'lluvia', audioId: 'audio-yu' },
+    { char: '跳', pinyin: 'tiào', spanish: 'saltar', audioId: 'audio-tiao' },
+    { char: '舞', pinyin: 'wǔ', spanish: 'danza', audioId: 'audio-wu' },
+    { char: '看', pinyin: 'kàn', spanish: 'ver', audioId: 'audio-kan' },
+    { char: '电', pinyin: 'diàn', spanish: 'electricidad (película)', audioId: 'audio-dian2' },
+    { char: '影', pinyin: 'yǐng', spanish: 'sombra (película)', audioId: 'audio-ying' },
+    { char: '购', pinyin: 'gòu', spanish: 'comprar', audioId: 'audio-gou' },
+    { char: '物', pinyin: 'wù', spanish: 'cosa', audioId: 'audio-wu1' },
+    { char: '唱', pinyin: 'chàng', spanish: 'cantar', audioId: 'audio-chang' },
+    { char: '书', pinyin: 'shū', spanish: 'libro', audioId: 'audio-shu' },
+    { char: '吃', pinyin: 'chī', spanish: 'comer', audioId: 'audio-chi' },
+    { char: '饭', pinyin: 'fàn', spanish: 'comida', audioId: 'audio-fan' },
+    { char: '做', pinyin: 'zuò', spanish: 'hacer', audioId: 'audio-zuo1' },
+    { char: '车', pinyin: 'chē', spanish: 'coche', audioId: 'audio-che' },
+    { char: '游', pinyin: 'yóu', spanish: 'nadar', audioId: 'audio-you' },
+    { char: '泳', pinyin: 'yǒng', spanish: 'natación', audioId: 'audio-yong' },
+    { char: '跑', pinyin: 'pǎo', spanish: 'correr', audioId: 'audio-pao' },
+    { char: '电', pinyin: 'diàn', spanish: 'electricidad (teléfono)', audioId: 'audio-dian3' },
+    { char: '话', pinyin: 'huà', spanish: 'palabra (teléfono)', audioId: 'audio-hua' }
+  ];
+
+
     let currentIndex = 0;
     let writer = null;
     let isDrawing = false;
     let showGuide = true;
     let lastX = 0;
     let lastY = 0;
+    let currentAudio = null;
 
     // Canvas setup
     const canvas = document.getElementById('character-canvas');
@@ -540,6 +668,39 @@ const characters = [
       strokeValueDisplay.textContent = e.target.value;
     });
     ctx.lineWidth = strokeWidthInput.value;
+
+    // Audio functions
+    function playAudio() {
+      const audioButton = document.getElementById('audio-button');
+      const character = characters[currentIndex];
+      
+      // Por ahora, reproducimos un sonido de muestra
+      // En producción, cada carácter debería tener su propio archivo de audio
+      if (character.audioId) {
+        const audio = document.getElementById(character.audioId);
+        if (audio) {
+          audioButton.classList.add('playing');
+          audio.play();
+          audio.onended = () => {
+            audioButton.classList.remove('playing');
+          };
+        } else {
+          // Si no hay audio específico, usar un audio genérico de muestra
+          console.log(`Reproduciendo pronunciación de: ${character.pinyin}`);
+          audioButton.classList.add('playing');
+          setTimeout(() => {
+            audioButton.classList.remove('playing');
+          }, 1000);
+        }
+      } else {
+        // Simulación de reproducción si no hay audio
+        console.log(`Reproduciendo pronunciación de: ${character.pinyin}`);
+        audioButton.classList.add('playing');
+        setTimeout(() => {
+          audioButton.classList.remove('playing');
+        }, 1000);
+      }
+    }
 
     // Drawing functions
     function startDrawing(e) {
@@ -714,6 +875,15 @@ const characters = [
         showCharacter(currentIndex);
       }, 250);
     });
+
+        // Play Audio function
+    function playAudio() {
+            const audioId = characters[currentIndex].audioId;
+            const audio = document.getElementById(audioId);
+            if (audio) {
+                audio.play();
+            }
+        }
   </script>
 </body>
 </html>
