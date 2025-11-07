@@ -6,224 +6,482 @@
   <title>Vocabulario básico UD6 de Chino I</title>
   <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap');
+    
+    * {
+      box-sizing: border-box;
+    }
+    
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Noto Serif SC', serif;
       display: flex;
       justify-content: center;
       align-items: flex-start;
       min-height: 100vh;
       margin: 0;
-      background-color: #f0f0f0;
+      background: linear-gradient(135deg, #f5f5dc 0%, #fff8dc 50%, #faf0e6 100%);
       text-align: center;
       padding: 20px;
+      position: relative;
+      overflow-x: hidden;
     }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 100px,
+          rgba(139, 69, 19, 0.03) 100px,
+          rgba(139, 69, 19, 0.03) 101px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 100px,
+          rgba(139, 69, 19, 0.03) 100px,
+          rgba(139, 69, 19, 0.03) 101px
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    body::after {
+      content: "";
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 120px;
+      height: 120px;
+      background-image: url('./laolao.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.6;
+      filter: contrast(1.2) sepia(0.3);
+      border-radius: 10%;
+      box-shadow: 0 0 20px rgba(139, 0, 0, 0.2);
+      z-index: 10;
+    }
+    
     .container {
       display: flex;
       width: 100%;
       max-width: 1200px;
+      position: relative;
+      z-index: 2;
     }
+    
+    h1.main-title {
+      font-family: 'Ma Shan Zheng', cursive;
+      font-size: 2.5rem;
+      color: #8b0000;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+      padding: 10px 30px;
+    }
+    
+    h1.main-title::before,
+    h1.main-title::after {
+      content: "〜";
+      position: absolute;
+      color: #cd5c5c;
+      font-size: 1.5rem;
+    }
+    
+    h1.main-title::before {
+      left: 0;
+    }
+    
+    h1.main-title::after {
+      right: 0;
+    }
+    
     .sidebar {
       width: 200px;
       margin-right: 20px;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 10px;
+      background: linear-gradient(to bottom, #fff, #faf8f3);
+      border: 2px solid #8b4513;
+      border-radius: 10px;
+      padding: 15px;
       overflow-y: auto;
       max-height: 80vh;
+      box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+      position: relative;
     }
+    
+    .sidebar::before {
+      position: absolute;
+      top: -15px;
+      right: 10px;
+      font-family: 'Ma Shan Zheng', cursive;
+      font-size: 30px;
+      color: rgba(139, 0, 0, 0.2);
+      transform: rotate(15deg);
+    }
+    
     .sidebar h3 {
       margin-top: 0;
-      font-size: 16px;
+      font-size: 18px;
+      color: #8b0000;
+      font-family: 'Ma Shan Zheng', cursive;
+      border-bottom: 2px solid #cd5c5c;
+      padding-bottom: 8px;
     }
+    
     .sidebar ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
+    
     .sidebar li {
-      margin: 5px 0;
+      margin: 8px 0;
     }
+    
     .sidebar button {
       width: 100%;
-      padding: 8px;
-      background-color: #f0f0f0;
-      border: 1px solid #ddd;
+      padding: 10px;
+      background: linear-gradient(to right, #faf8f3, #fff);
+      border: 1px solid #8b4513;
       cursor: pointer;
       text-align: left;
-      border-radius: 3px;
+      border-radius: 5px;
       font-size: 14px;
+      font-family: 'Noto Sans SC', serif;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
+    
     .sidebar button:hover {
-      background-color: #e0e0e0;
+      background: linear-gradient(to right, #fff8dc, #ffefd5);
+      border-color: #8b0000;
+      transform: translateX(3px);
     }
+    
     .sidebar button.active {
-      background-color: #4CAF50;
+      background: linear-gradient(to right, #8b0000, #cd5c5c);
       color: white;
+      border-color: #8b0000;
+      box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
     }
+    
     .main-content {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+    
     .character-display-section {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-bottom: 20px;
+      position: relative;
     }
+    
     #character-target-div {
-      border: 1px solid #ccc;
-      background-color: white;
+      border: 3px solid #8b4513;
+      background: linear-gradient(135deg, #fffaf0 0%, #fff 100%);
       margin: 20px 0 10px 0;
       width: 150px;
       height: 150px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+      position: relative;
     }
+    
+    #character-target-div::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #cd5c5c, #8b0000);
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
     .replay-button {
-      padding: 8px 16px;
-      background-color: #FF9800;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #cd853f, #daa520);
       color: white;
-      border: none;
-      border-radius: 5px;
+      border: 1px solid #8b4513;
+      border-radius: 20px;
       cursor: pointer;
       font-size: 14px;
+      font-family: 'Noto Serif SC', serif;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 8px;
       margin: 0 auto;
-      transition: background-color 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(139, 69, 19, 0.3);
     }
+    
     .replay-button:hover {
-      background-color: #F57C00;
+      background: linear-gradient(135deg, #b8860b, #cd853f);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
     }
+    
     .replay-button:active {
-      transform: scale(0.95);
+      transform: translateY(0);
     }
+    
     .canvas-container {
       position: relative;
       margin: 20px 0;
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: inset 0 0 10px rgba(139, 69, 19, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
     }
+    
     #character-canvas {
-      border: 2px solid #333;
-      border-radius: 5px;
+      border: 2px solid #8b4513;
+      border-radius: 8px;
       cursor: crosshair;
-      background-color: white;
+      background: linear-gradient(to bottom right, #fffaf0, #fff);
       touch-action: none;
+      box-shadow: 0 2px 10px rgba(139, 69, 19, 0.2);
+      max-width: 100%;
+      height: auto;
     }
+    
     .canvas-controls {
-      margin-top: 10px;
+      margin-top: 15px;
       display: flex;
       gap: 10px;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
+      width: 100%;
+      padding: 0 10px;
     }
+    
     .canvas-controls button {
-      padding: 8px 15px;
+      padding: 10px 18px;
       font-size: 14px;
-      background-color: #2196F3;
+      background: linear-gradient(135deg, #4682b4, #5f9ea0);
       color: white;
-      border: none;
+      border: 1px solid #2f4f4f;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 20px;
+      font-family: 'Noto Serif SC', serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(70, 130, 180, 0.3);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
+    
     .canvas-controls button:hover {
-      background-color: #1976D2;
+      background: linear-gradient(135deg, #5f9ea0, #4682b4);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(70, 130, 180, 0.4);
     }
+    
     .clear-button {
-      background-color: #f44336 !important;
+      background: linear-gradient(135deg, #dc143c, #b22222) !important;
+      border: 1px solid #8b0000 !important;
     }
+    
     .clear-button:hover {
-      background-color: #d32f2f !important;
+      background: linear-gradient(135deg, #b22222, #dc143c) !important;
     }
+    
     .stroke-control {
       display: flex;
       align-items: center;
       gap: 10px;
+      padding: 8px 15px;
+      background: #faf8f3;
+      border-radius: 20px;
+      border: 1px solid #8b4513;
+      flex-shrink: 0;
     }
+    
     .stroke-control input {
       width: 100px;
     }
+    
     .nav-buttons {
       margin-top: 20px;
       display: flex;
-      gap: 10px;
+      gap: 15px;
       justify-content: center;
     }
+    
     .nav-buttons button {
-      padding: 10px 20px;
+      padding: 12px 25px;
       font-size: 16px;
-      background-color: #4CAF50;
+      background: linear-gradient(135deg, #8b0000, #cd5c5c);
       color: white;
-      border: none;
+      border: 1px solid #8b0000;
       cursor: pointer;
-      border-radius: 5px;
-    }
-    .nav-buttons button:hover {
-      background-color: #45a049;
-    }
-    #current-word {
-      font-size: 20px;
-      margin-bottom: 10px;
-      font-weight: bold;
-      padding: 0 10px;
-    }
-    .practice-section {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 400px;
-    }
-    .practice-section h3 {
-      margin-top: 0;
-      color: #333;
+      border-radius: 25px;
+      font-family: 'Noto Serif SC', serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(139, 0, 0, 0.3);
     }
     
-    /* Mobile menu toggle */
+    .nav-buttons button:hover {
+      background: linear-gradient(135deg, #cd5c5c, #8b0000);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+    }
+    
+    #current-word {
+      font-size: 24px;
+      margin-bottom: 15px;
+      padding: 15px 30px;
+      background: linear-gradient(to right, #faf8f3, #fff);
+      border: 2px solid #8b4513;
+      border-radius: 30px;
+      color: #000;
+      box-shadow: 0 3px 10px rgba(139, 69, 19, 0.2);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      min-width: 300px;
+    }
+    
+    #current-word::before,
+    #current-word::after {
+      content: "•";
+      position: absolute;
+      color: #cd5c5c;
+      font-size: 20px;
+    }
+    
+    #current-word::before {
+      left: 10px;
+    }
+    
+    #current-word::after {
+      right: 10px;
+    }
+
+    .hanzi {
+      font-family: 'Ma Shan Zheng', cursive;
+      font-size: 36px;
+      color: #8b0000;
+      font-weight: normal;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .info {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+
+    .info .pinyin {
+      color: #4682b4;
+      font-family: sans-serif;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .info .spanish {
+      color: #555;
+      font-size: 16px;
+    }
+    
+    .practice-section {
+      background: linear-gradient(135deg, #fff, #faf8f3);
+      padding: 25px;
+      border-radius: 15px;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+      width: 100%;
+      max-width: 400px;
+      border: 2px solid #8b4513;
+      position: relative;
+    }
+    
+    .practice-section::before {
+      position: absolute;
+      top: -12px;
+      left: 20px;
+      background: linear-gradient(135deg, #fff, #faf8f3);
+      padding: 0 10px;
+      font-family: 'Ma Shan Zheng', cursive;
+      font-size: 20px;
+      color: #8b0000;
+    }
+    
+    .practice-section h3 {
+      margin-top: 0;
+      color: #8b0000;
+      font-family: 'Ma Shan Zheng', cursive;
+      font-size: 22px;
+    }
+    
     .mobile-menu-toggle {
       display: none;
       width: 100%;
-      padding: 10px;
-      background-color: #4CAF50;
+      padding: 12px;
+      background: linear-gradient(135deg, #8b0000, #cd5c5c);
       color: white;
-      border: none;
-      border-radius: 5px;
+      border: 1px solid #8b0000;
+      border-radius: 25px;
       font-size: 16px;
       margin-bottom: 10px;
       cursor: pointer;
+      font-family: 'Noto Serif SC', serif;
+      box-shadow: 0 3px 10px rgba(139, 0, 0, 0.3);
     }
 
-    /* Audio */
-      .audio-button {
-          background-color: skyblue;
-          border-radius: 50%;
-          width: 30px;
-          height: 30px;
-          border: none;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 13px;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
+    .audio-button {
+      background: linear-gradient(135deg, #87ceeb, #4682b4);
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      border: 2px solid #4682b4;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(70, 130, 180, 0.3);
+      position: absolute;
+      top: 20px;
+      right: -50px;
+    }
 
-      .audio-button:hover {
-          background-color: #7dd3fc;
-          transform: scale(1.1);
-          box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-      }
+    .audio-button:hover {
+      background: linear-gradient(135deg, #4682b4, #87ceeb);
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 6px 15px rgba(70, 130, 180, 0.4);
+    }
 
-      .audio-button:active {
-          transform: scale(0.95);
-      }
+    .audio-button:active {
+      transform: scale(0.95);
+    }
 
-    /* Attribution */
     .attribution {
       display: flex;
       flex-direction: column;
@@ -231,25 +489,37 @@
       justify-content: center;
       width: 100%;
       text-align: center;
-      padding: 15px 10px;
-      margin-top: 30px;
+      padding: 20px 10px;
+      margin-top: 40px;
       font-size: 14px;
-      color: #555;
+      color: #8b4513;
+      background: linear-gradient(to right, transparent, #faf8f3, transparent);
+      border-radius: 20px;
+      font-family: 'Noto Serif SC', serif;
     }
 
     .attribution a {
-      color: #0073b1;
+      color: #8b0000;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s ease;
     }
 
     .attribution a:hover {
+      color: #cd5c5c;
       text-decoration: underline;
     }
-    /* Tablet styles */
+    
     @media (max-width: 768px) {
       body {
         padding: 15px;
+      }
+      
+      body::after {
+        width: 80px;
+        height: 80px;
+        bottom: 20px;
+        right: 20px;
       }
       
       .container {
@@ -266,18 +536,70 @@
       .practice-section {
         padding: 15px;
         max-width: 100%;
+        width: calc(100% - 20px);
+      }
+
+      .canvas-container {
+        padding: 10px;
       }
       
       #character-canvas {
         width: 220px !important;
         height: 220px !important;
       }
+      
+      .audio-button {
+        position: static;
+        margin-bottom: 10px;
+      }
+
+      #current-word {
+        flex-direction: column;
+        gap: 8px;
+        min-width: auto;
+        padding: 12px 25px;
+      }
+
+      .hanzi {
+        font-size: 32px;
+      }
+
+      .info {
+        align-items: center;
+        text-align: center;
+      }
+
+      .canvas-controls {
+        gap: 8px;
+        padding: 0 5px;
+      }
+
+      .canvas-controls button {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .stroke-control {
+        width: 100%;
+        justify-content: center;
+        padding: 6px 10px;
+      }
+
+      .stroke-control input {
+        width: 80px;
+      }
     }
     
-    /* Mobile styles */
     @media (max-width: 600px) {
       body {
         padding: 10px;
+      }
+      
+      body::after {
+        width: 60px;
+        height: 60px;
+        bottom: 15px;
+        right: 15px;
       }
       
       .mobile-menu-toggle {
@@ -297,17 +619,36 @@
       }
       
       .sidebar h3 {
-        font-size: 14px;
+        font-size: 16px;
       }
       
       .sidebar button {
-        padding: 6px;
+        padding: 8px;
         font-size: 12px;
       }
       
       #current-word {
-        font-size: 16px;
+        font-size: 18px;
         margin-bottom: 10px;
+        padding: 10px 20px;
+        flex-direction: column;
+        gap: 5px;
+        min-width: auto;
+        width: calc(100% - 20px);
+      }
+
+      .hanzi {
+        font-size: 28px;
+      }
+
+      .info {
+        font-size: 14px;
+        align-items: center;
+        text-align: center;
+      }
+
+      .info .spanish {
+        font-size: 13px;
       }
       
       #character-target-div {
@@ -318,59 +659,107 @@
       
       .replay-button {
         font-size: 13px;
-        padding: 6px 12px;
+        padding: 8px 15px;
       }
       
       .practice-section {
-        padding: 15px;
+        padding: 12px;
         margin-top: 15px;
+        width: calc(100% - 10px);
       }
       
       .practice-section h3 {
-        font-size: 16px;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .canvas-container {
+        padding: 8px;
+        margin: 10px 0;
       }
       
       #character-canvas {
-        width: 200px !important;
-        height: 200px !important;
+        width: 180px !important;
+        height: 180px !important;
       }
       
       .canvas-controls {
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
+        padding: 0;
+        width: 100%;
       }
       
       .canvas-controls button {
         width: 100%;
-        padding: 10px;
+        padding: 8px;
+        font-size: 12px;
       }
       
       .stroke-control {
         width: 100%;
         justify-content: center;
+        padding: 6px 10px;
+      }
+
+      .stroke-control input {
+        width: 70px;
+      }
+
+      .stroke-control label {
+        font-size: 13px;
       }
       
       .nav-buttons {
         flex-wrap: wrap;
         gap: 8px;
+        width: 100%;
+        padding: 0 5px;
       }
       
       .nav-buttons button {
         flex: 1;
         min-width: 120px;
-        padding: 12px 15px;
+        padding: 10px 12px;
         font-size: 14px;
+      }
+      
+      .audio-button {
+        position: static;
+        margin-bottom: 10px;
       }
     }
     
-    /* Very small mobile styles */
     @media (max-width: 400px) {
       body {
         padding: 5px;
       }
       
+      body::after {
+        width: 50px;
+        height: 50px;
+        bottom: 10px;
+        right: 10px;
+      }
+      
       #current-word {
-        font-size: 14px;
+        font-size: 16px;
+        padding: 8px 15px;
+        flex-direction: column;
+        gap: 3px;
+        width: 100%;
+      }
+
+      .hanzi {
+        font-size: 24px;
+      }
+
+      .info {
+        font-size: 12px;
+      }
+
+      .info .spanish {
+        font-size: 11px;
       }
       
       #character-target-div {
@@ -380,37 +769,88 @@
       
       .replay-button {
         font-size: 12px;
-        padding: 5px 10px;
-      }
-      
-      #character-canvas {
-        width: 180px !important;
-        height: 180px !important;
+        padding: 6px 12px;
       }
       
       .practice-section {
         padding: 10px;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
       }
       
       .practice-section h3 {
-        font-size: 14px;
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+
+      .canvas-container {
+        padding: 5px;
+      }
+      
+      #character-canvas {
+        width: 160px !important;
+        height: 160px !important;
+      }
+      
+      .canvas-controls {
+        gap: 5px;
       }
       
       .canvas-controls button {
-        font-size: 13px;
-        padding: 8px;
+        font-size: 11px;
+        padding: 7px;
+      }
+
+      .stroke-control {
+        padding: 5px 8px;
+      }
+
+      .stroke-control input {
+        width: 60px;
+      }
+
+      .stroke-control label {
+        font-size: 12px;
       }
       
       .nav-buttons button {
         font-size: 13px;
-        padding: 10px 12px;
+        padding: 8px 10px;
+        min-width: 100px;
       }
     }
     
-    /* Landscape mobile */
+    @media (max-width: 350px) {
+      #character-canvas {
+        width: 140px !important;
+        height: 140px !important;
+      }
+      
+      .canvas-controls button {
+        font-size: 10px;
+        padding: 6px;
+      }
+
+      .stroke-control {
+        font-size: 11px;
+      }
+
+      .stroke-control input {
+        width: 50px;
+      }
+    }
+    
     @media (max-width: 900px) and (orientation: landscape) {
       body {
         padding: 10px;
+      }
+      
+      body::after {
+        width: 60px;
+        height: 60px;
+        bottom: 10px;
+        right: 10px;
       }
       
       .container {
@@ -428,7 +868,7 @@
       }
       
       .sidebar button {
-        padding: 5px;
+        padding: 6px;
         font-size: 12px;
       }
       
@@ -439,16 +879,30 @@
       
       .replay-button {
         font-size: 12px;
-        padding: 5px 10px;
+        padding: 6px 12px;
+      }
+      
+      .practice-section {
+        padding: 10px;
+        max-width: 350px;
+      }
+
+      .canvas-container {
+        padding: 8px;
       }
       
       #character-canvas {
         width: 180px !important;
         height: 180px !important;
       }
-      
-      .practice-section {
-        padding: 10px;
+
+      .canvas-controls {
+        gap: 6px;
+      }
+
+      .canvas-controls button {
+        padding: 7px 10px;
+        font-size: 12px;
       }
       
       .mobile-menu-toggle {
@@ -457,6 +911,25 @@
       
       .sidebar {
         display: block !important;
+      }
+      
+      .audio-button {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+      }
+
+      #current-word {
+        font-size: 18px;
+        padding: 10px 20px;
+      }
+
+      .hanzi {
+        font-size: 28px;
+      }
+
+      .info {
+        font-size: 14px;
       }
     }
   </style>
@@ -529,7 +1002,7 @@
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰ Menú de Caracteres</button>
     
     <div class="sidebar" id="sidebar">
-      <h3>Selecciona un carácter</h3>
+      <h3>Selecciona un caracter</h3>
       <ul id="character-menu"></ul>
     </div>
 
